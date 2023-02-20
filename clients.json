@@ -1,0 +1,12 @@
+{
+  "pcs": [
+    {
+      "name:": "MacBook",
+      "ip_address": "192.168.0.121"
+    },
+    {
+      "name:": "Matt's PC",
+      "ip_address": "192.168.0.79"
+    }
+  ]
+}
