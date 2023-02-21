@@ -3,7 +3,19 @@ import pyautogui
 import webbrowser
 import os
 from appJar import gui
-
+print("Client Now Active")
+print("Built By Frostie Studios")
+print("View on GitHub: https://github.com/frostiestudios/RRSM")
+tricommand = input("Insert 3 Letter TriCommand")
+if tricommand == 'NUT':
+        print("Running a command")
+        webbrowser.open("https://www.youtube.com/watch?v=9bSGlMd1Y7Q")
+        print("It's the nutshack")
+if tricommand == 'SHK':
+        webbrowser.open("https://www.google.com/")
+        pyautogui.sleep(5)
+        pyautogui.typewrite("It's The Nutshack")
+        pyautogui.press('enter')
 def receive_message():
     # Create a socket and listen for incoming connections
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
