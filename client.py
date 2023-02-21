@@ -1,33 +1,39 @@
 import socket
-import json
+from appJar import gui
 
-with open('config.json') as f:
-    config = json.load(f)
+def receive_message():
+    # Create a socket and listen for incoming connections
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("0.0.0.0", 12345))
+    s.listen(1)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(('0.0.0.0', config['port']))
-s.listen(1)
+    conn, addr = s.accept()
+    print(f"Connection from {addr}")
+    data = conn.recv(1024).decode()
+    print(f"Received: {data}")
+    app = gui("Message")
+    app.infoBox("Message Received", data)
+    app.addLabel(f"From:{addr}")
+    conn.close()
+    receive_message()
+    
+def receive_file():
+    # Create a socket and listen for incoming connections
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("0.0.0.0", 12345))
+    s.listen(1)
 
-conn, addr = s.accept()
-print(f"Connected by {addr}")
+    # Accept a connection
+    conn, addr = s.accept()
+    print(f"Connection from {addr}")
 
+    # Receive and save the file
+    with open("received_file.bin", "wb") as f:
+        f.write(conn.recv(1024))
+
+    # Close the socket
+    conn.close()
+# Create a loop to continuously listen for incoming connections
 while True:
-    data = conn.recv(1024)
-    if not data:
-        break
-    
-    data = data.decode().strip()
-    
-    if data.startswith("LINK:"):
-        link = data[len("LINK:"):]
-        # handle link
-    elif data.startswith("COMMAND:"):
-        command = data[len("COMMAND:"):]
-        # handle command
-    elif data.startswith("MESSAGE:"):
-        message = data[len("MESSAGE:"):]
-        # handle message
-    else:
-        # handle unknown data
-    
-conn.close()
+    receive_message()
+    receive_file()
