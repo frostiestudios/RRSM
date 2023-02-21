@@ -1,4 +1,7 @@
 import socket
+import pyautogui
+import webbrowser
+import os
 from appJar import gui
 
 def receive_message():
@@ -10,8 +13,22 @@ def receive_message():
     print(f"Connection from {addr}")
     data = conn.recv(1024).decode()
     print(f"Received: {data}")
-    if data=="CMD":
+    if data=="NUT":
         print("Running a command")
+        webbrowser.open("https://www.youtube.com/watch?v=9bSGlMd1Y7Q")
+        print("It's the nutshack")
+    if data=="SHK":
+        webbrowser.open("https://www.google.com/")
+        pyautogui.sleep(5)
+        pyautogui.typewrite("It's The Nutshack")
+        pyautogui.press('enter')
+    if data=="RES":
+        print("Restarting")  
+    if data=="SHU":
+        os.system("shutdown /s /t 1")
+        print("Powering Off")  
+    if data=="SLE":
+        print("Shuting Down")  
     conn.close()
     receive_message()
     
