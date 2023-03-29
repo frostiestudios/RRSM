@@ -79,6 +79,5 @@ app.addImage("I5","images/help.png")
 app.stopLabelFrame()
 
 app.startLabelFrame("Sigma",5,1)
-
 app.stopLabelFrame()
 app.go()
