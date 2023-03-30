@@ -20,7 +20,9 @@ def openfile(btn):
     if btn=="Close":
         print("BYE")
         app.stop()
-    
+    if btn=="Open Log":
+        print("Opening Log")
+        
 app = gui("Remote",useTtk=True)
 app.addImage("1",'images/radio.png')
 app.addMessage("Waiting for an incoming connection")
