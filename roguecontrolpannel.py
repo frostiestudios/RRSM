@@ -4,6 +4,7 @@ import webbrowser
 import subprocess
 import threading
 import pyautogui
+import json
 print("Starting Initial Loading")
 print("LOG1")
 print("LOG2")
@@ -13,6 +14,15 @@ print("History Avail Below")
 print("______________")
 #Unicode Numbers
 PLAY= 	"\u23F5"
+#Load JSON
+with open('config.json','r') as f:
+    data = json.load(f)
+#Load data from JSON
+pcname = [pc['PCName'] for pc in data]
+ips = [pc['IP'] for pc in data]
+print ("PCNames:",pcname)
+print ("IPs:",ips)
+#Funcs
 def fair(btn):
     print("opening")
     webbrowser.open_new_tab("https://fareharbor.com/flightdeck1/dashboard/bookings/grid/2023-02-25/")
@@ -52,6 +62,8 @@ def debug():
     
 tools = ["Start", "Stop"]
 app = gui("Rogue Command Center",useTtk=True)
+app.startTabbedFrame("Tabs")
+app.startTab("Local Commands")
 app.addLabel("Title","Command Center",0,1)
 app.startLabelFrame("XAMPP",1,1)
 
@@ -75,9 +87,15 @@ app.addButtons(["Open Fair Harbor"],fair)
 app.stopLabelFrame()
 
 app.startLabelFrame("Debug",3,1,3)
-app.addImage("I5","images/help.png")
+app.addImage("I5","images/png/help.png")
 app.stopLabelFrame()
 
 app.startLabelFrame("Sigma",5,1)
 app.stopLabelFrame()
+app.stopTab()
+app.startTab("Remote Commands")
+app.stopTab()
+
+app.startTab("Settings")
+app.stopTab()
 app.go()
